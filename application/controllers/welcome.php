@@ -75,16 +75,41 @@ class Welcome extends CI_Controller {
 
 	}
 
+	public function file_func(){
+		if ($_FILES["file"]["error"] > 0)
+		 {
+		  	echo "Error: " . $_FILES["file"]["error"] . "<br />";
+		}
+		else
+		 {
+		 	print_r($_FILES);
+			
+			  echo "Upload: " . $_FILES["file"]["name"] . "<br />";
+			  echo "Type: " . $_FILES["file"]["type"] . "<br />";
+			  echo "Size: " . ($_FILES["file"]["size"] / 1024) . " Kb<br />";
+			  echo "Stored in: " . $_FILES["file"]["tmp_name"];
+			  
+			  move_uploaded_file($_FILES["file"]["tmp_name"],"upload/" . $_FILES["file"]["name"]);
+      		echo "Stored in: " . "upload/" . $_FILES["file"]["name"];
+	  
+	  		
+		 }
+	}
+
 	public function index()
 	{
-		$this->load->library('image_lib');
+		$this->load->view('demo.php');
 
-		$arr_img1 = $this->resize_img('assets/ad_1.jpg');
-		$arr_img2 = $this->resize_img('assets/ad_2.jpg');
+
+
+		// $this->load->library('image_lib');
+
+		// $arr_img1 = $this->resize_img('assets/ad_1.jpg');
+		// $arr_img2 = $this->resize_img('assets/ad_2.jpg');
 
 		
-		$this->make_img('assets/bg.jpg',$arr_img1,false);
-		$this->make_img('assets/bg.jpg',$arr_img2,true);
+		// $this->make_img('assets/bg.jpg',$arr_img1,false);
+		// $this->make_img('assets/bg.jpg',$arr_img2,true);
 
 
 		// $this->load->library('image_lib');
