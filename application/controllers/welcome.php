@@ -17,6 +17,9 @@ class Welcome extends CI_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see http://codeigniter.com/user_guide/general/urls.html
 	 */
+	/**
+	 * 缩放图片
+	 */
 	function resize_img($source_image){
 		$this->image_lib->clear();
 		$config['image_library'] = 'gd2';
@@ -29,6 +32,7 @@ class Welcome extends CI_Controller {
 		if (!$this->image_lib->resize()) {
  		   return $this->image_lib->display_errors();
 		}
+		
 		$path_file = pathinfo(basename($source_image));
 	
 		$arr_img = getimagesize('assets/'.$path_file['filename'].'_thumb.'.$path_file['extension']);
@@ -36,7 +40,10 @@ class Welcome extends CI_Controller {
 		
 		return $arr_img;
 	}
-
+	
+	/**
+	 * 两张图合并
+	 */
 	function make_img($source_image,$add_img,$is_padding){
 		$this->image_lib->clear();
 
@@ -67,12 +74,7 @@ class Welcome extends CI_Controller {
 			
 		}
 		
-		
-		
-
 		unlink($config['wm_overlay_path']);
-
-
 	}
 
 	public function file_func(){
@@ -95,9 +97,10 @@ class Welcome extends CI_Controller {
 	  		
 		 }
 	}
-
+	
 	public function index()
 	{
+		
 		$this->load->view('demo.php');
 
 
